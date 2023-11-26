@@ -11,3 +11,6 @@ class student_query_form(ModelForm):
     class Meta:
         model=student_basic
         fields=['Registration_no']
+
+
+

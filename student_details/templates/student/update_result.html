@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Update Result</title>
     <style>
         h1{
             background-color: chocolate;
@@ -11,20 +11,19 @@
             display: inline;
         }
         a{
+            background-color: chocolate;
+            color: blue;
             font-size: xx-large;  
         }
     </style>
+
 </head>
 <body>
-    <h1>Welcome to Student Portal</h1>
+    <a href="/">HOME</a>
+    <a href="/update/">Update</a>
     <br>
     <hr>
-    <a href="form/">Add Student</a>
-    <br>
-    <a href="Query/">Query Student</a>
-    <br>
-    <a href="update/">Update</a>
-    <br>
-    <a href="delete/">Delete</a>
+    <h1>{{ success }}</h1>
+
 </body>
 </html>

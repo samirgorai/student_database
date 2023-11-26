@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        h1{
+            background-color: chocolate;
+            color: blue;
+            display: inline;
+        }
+        a{
+            font-size: xx-large;  
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Update Student Details for a student</h1>
+    <br>
+    <a href="/">HOME</a>
+    <hr>
+    
+    <form action="/update/updateResultGet/",method='GET'>
+        {% csrf_token %}
+        {{get_form}}
+        <input type="submit" value="Get">
+    </form>
+    {{found}}
+    <form action="/update/updateResultPost/" ,method='GET'>
+        {% csrf_token %}
+        <label for="Registration_no">First Name</label>
+        <input type="text" value={{Registration_no}} name="Registration_no" readonly>   
+        <label for="F_name">First Name</label>
+        <input type="text" value={{F_name}} name="F_name">
+        <label for="F_name">Last Name</label>
+        <input type="text" value={{L_name}} name="L_name">
+        <input type="submit" value="update">
+    </form>
+</body>
+</html>
