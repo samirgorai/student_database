@@ -28,7 +28,8 @@
         {{get_form}}
         <input type="submit" value="Get">
     </form>
-    {{found}}
+    
+    {% if Found %}
     <form action="/delete/updatedelete/" ,method='GET'>
         {% csrf_token %}
         <label for="Registration_no">First Name</label>
@@ -39,5 +40,8 @@
         <input type="text" value={{L_name}} name="L_name" readonly>
         <input type="submit" value="delete">
     </form>
+    {% else %}
+    <p>NOT Found</p>
+    {% endif %}
 </body>
 </html>

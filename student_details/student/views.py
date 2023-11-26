@@ -96,10 +96,10 @@ def update_action_read(request):
         try:
             #Get the data from Database based on Registration no 
             sb_query=student_basic.objects.get(Registration_no=Registration_no_query)
-            send_dict={'Found':'Succesfull','F_name':sb_query.F_name,'L_name':sb_query.L_name,'Registration_no':sb_query.Registration_no,'get_form':form}
+            send_dict={'Found':True,'F_name':sb_query.F_name,'L_name':sb_query.L_name,'Registration_no':sb_query.Registration_no,'get_form':form}
         except:
             #if the data is not found with the registration no then this block will execute
-            send_dict={'found':'NOT Succesfull','F_name':"",'L_name':"",'Registration_no':"",'get_form':form} 
+            send_dict={'found':False,'F_name':"",'L_name':"",'Registration_no':"",'get_form':form} 
     
     return render(request,'student/update.html',send_dict)
 
@@ -143,10 +143,10 @@ def delete_read(request):
         try:
             #Get the data from Database based on Registration no 
             sb_query=student_basic.objects.get(Registration_no=Registration_no_query)
-            send_dict={'Found':'Succesfull','F_name':sb_query.F_name,'L_name':sb_query.L_name,'Registration_no':sb_query.Registration_no,'get_form':form}
+            send_dict={'Found':True,'F_name':sb_query.F_name,'L_name':sb_query.L_name,'Registration_no':sb_query.Registration_no,'get_form':form}
         except:
             #if the data is not found with the registration no then this block will execute
-            send_dict={'found':'NOT Succesfull','F_name':"",'L_name':"",'Registration_no':"",'get_form':form} 
+            send_dict={'found':False,'F_name':"",'L_name':"",'Registration_no':"",'get_form':form} 
     
     return render(request,'student/delete.html',send_dict)
 
