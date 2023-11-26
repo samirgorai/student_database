@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete</title>
+    <style>
+        h1{
+            background-color: chocolate;
+            color: blue;
+            display: inline;
+        }
+        a{
+            background-color: chocolate;
+            color: blue;
+            font-size: xx-large;  
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Delete a Student Details from Database</h1>
+    <br>
+    <a href="/">HOME</a>
+    <hr>
+    <form action="/delete/updatedeleteread/",method='GET'>
+        {% csrf_token %}
+        {{get_form}}
+        <input type="submit" value="Get">
+    </form>
+    {{found}}
+    <form action="/delete/updatedelete/" ,method='GET'>
+        {% csrf_token %}
+        <label for="Registration_no">First Name</label>
+        <input type="text" value={{Registration_no}} name="Registration_no" readonly>   
+        <label for="F_name">First Name</label>
+        <input type="text" value={{F_name}} name="F_name" readonly>
+        <label for="F_name">Last Name</label>
+        <input type="text" value={{L_name}} name="L_name" readonly>
+        <input type="submit" value="delete">
+    </form>
+</body>
+</html>

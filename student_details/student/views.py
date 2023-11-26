@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from student.forms import student_basic_form,student_query_form
 from student.models import student_basic
 # Create your views here.
@@ -44,10 +44,7 @@ def querystudent(request):
 
     return render(request,'student/result.html',send_dict)
 
-def update(request):
-    form=student_query_form()
-    print('in ---view.update--- ')
-    return render(request,'student/update.html',{'get_form':form})
+
 
 
 """def update_action(request):
@@ -83,7 +80,10 @@ def update(request):
             
     return render(request,'student/update_result.html')
             """
-
+def update(request):
+    form=student_query_form()
+    print('in ---view.update--- ')
+    return render(request,'student/update.html',{'get_form':form})
 
 def update_action_read(request):
 
@@ -99,7 +99,7 @@ def update_action_read(request):
             send_dict={'Found':'Succesfull','F_name':sb_query.F_name,'L_name':sb_query.L_name,'Registration_no':sb_query.Registration_no,'get_form':form}
         except:
             #if the data is not found with the registration no then this block will execute
-            send_dict={'found':'NOT Succesfull','F_name':"XXXXX",'L_name':"XXXXX",'Registration_no':"XXXXX",'get_form':form} 
+            send_dict={'found':'NOT Succesfull','F_name':"",'L_name':"",'Registration_no':"",'get_form':form} 
     
     return render(request,'student/update.html',send_dict)
 
@@ -123,3 +123,49 @@ def update_action_update(request):
             return render(request,'student/update_result.html',{'success':'Failed to Update'})
                
     return render(request,'student/update_result.html')
+
+
+
+def delete(request):
+    form=student_query_form()
+    print('in ---view.update--- ')
+    return render(request,'student/delete.html',{'get_form':form})
+
+
+def delete_read(request):
+     
+    if request.method == 'GET':
+       
+        Registration_no_query=request.GET['Registration_no']
+        form=student_query_form()
+        
+
+        try:
+            #Get the data from Database based on Registration no 
+            sb_query=student_basic.objects.get(Registration_no=Registration_no_query)
+            send_dict={'Found':'Succesfull','F_name':sb_query.F_name,'L_name':sb_query.L_name,'Registration_no':sb_query.Registration_no,'get_form':form}
+        except:
+            #if the data is not found with the registration no then this block will execute
+            send_dict={'found':'NOT Succesfull','F_name':"",'L_name':"",'Registration_no':"",'get_form':form} 
+    
+    return render(request,'student/delete.html',send_dict)
+
+
+def delete_result(request):
+       
+    if request.method == 'GET':
+        
+        
+        try:
+            Registration_no_query=request.GET['Registration_no']
+            #sb_query=student_basic.objects.get(Registration_no=Registration_no_query)
+            sb_delete=get_object_or_404(student_basic,Registration_no=Registration_no_query)
+            sb_delete.delete()
+
+            return render(request,'student/delete_result.html',{'success':'Succesfully deleted'})
+        
+        except:    
+            print('----update_action_post  Except------')
+            return render(request,'student/delete_result.html',{'success':'Failed to delete'})
+               
+    return render(request,'student/delete_result.html')
