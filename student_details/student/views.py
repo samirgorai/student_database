@@ -13,14 +13,21 @@ def form(request):
     form=student_basic_form()
     return render(request,'student/form.html',{'form':form})
 
+#for saving new data
+
 def submit(request):
     if request.method=='POST':
         form_data=student_basic_form(request.POST)
+        print('----student_basic.objects.filter(Registration_no=request.POST[Registration_no]).exists()----',student_basic.objects.filter(Registration_no=request.POST['Registration_no']).exists())
         if form_data.is_valid():
+            #print('----student_basic.objects.filter(Registration_no=request.POST[Registration_no]).exists()----',student_basic.objects.filter(Registration_no=request.POST['Registration_no']).exists())
+            #if(student_basic.objects.filter(Registration_no=request.POST['Registration_no']).exists()):
             sb=student_basic(F_name=request.POST['F_name'],L_name=request.POST['L_name'],Registration_no=request.POST['Registration_no'])
             sb.save()
-
-    return render(request,'student/submit.html')
+            return render(request,'student/submit.html',{"message":"succesfully Submitted"})
+        else:
+            return render(request,'student/submit.html',{"message":"NOT succesfully Submitted"})
+                
 
 
 def query(request):
@@ -50,7 +57,6 @@ def querystudent(request):
 """def update_action(request):
 
     if request.method == 'GET':
-        print('---in update action get---')
         Registration_no_query=request.GET['Registration_no']
         
         
@@ -65,7 +71,6 @@ def querystudent(request):
         return render(request,'student/update.html',send_dict)
 
     if request.method == 'POST':
-        print('---in view.update_action post---')
         try:
             Registration_no_query=request.POST['Registration_no']
             sb_query=student_basic.objects.get(Registration_no=Registration_no_query)
@@ -82,7 +87,6 @@ def querystudent(request):
             """
 def update(request):
     form=student_query_form()
-    print('in ---view.update--- ')
     return render(request,'student/update.html',{'get_form':form})
 
 def update_action_read(request):
@@ -119,7 +123,6 @@ def update_action_update(request):
             return render(request,'student/update_result.html',{'success':'Succesfully Updated'})
         
         except:    
-            print('----update_action_post  Except------')
             return render(request,'student/update_result.html',{'success':'Failed to Update'})
                
     return render(request,'student/update_result.html')
@@ -128,7 +131,6 @@ def update_action_update(request):
 
 def delete(request):
     form=student_query_form()
-    print('in ---view.update--- ')
     return render(request,'student/delete.html',{'get_form':form})
 
 
@@ -165,7 +167,6 @@ def delete_result(request):
             return render(request,'student/delete_result.html',{'success':'Succesfully deleted'})
         
         except:    
-            print('----update_action_post  Except------')
             return render(request,'student/delete_result.html',{'success':'Failed to delete'})
                
     return render(request,'student/delete_result.html')
