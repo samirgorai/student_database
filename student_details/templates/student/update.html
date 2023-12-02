@@ -28,12 +28,12 @@
         {{get_form}}
         <input type="submit" value="Get">
     </form>
-
+    <hr>
     {% if Found %}
     <form action="/update/updateResultPost/" ,method='GET'>
         {% csrf_token %}
-        <label for="Registration_no">First Name</label>
-        <input type="text" value={{Registration_no}} name="Registration_no" readonly>   
+        <label for="Registration_no">Registration_no</label>
+        <input type="number" value={{Registration_no}} name="Registration_no" readonly>   
         <label for="F_name">First Name</label>
         <input type="text" value={{F_name}} name="F_name">
         <label for="F_name">Last Name</label>
